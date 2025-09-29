@@ -1,0 +1,35 @@
+{
+  "name": "webpack-base",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clear": "del /s /q dist || rm -rf dist",
+    "clear:public": "del /s /q dist\\public && rmdir /s /q dist\\public",
+    "clear:html": "del /s /q dist\\*.html || rm -f dist/*.html",
+    "build:dev": "npm run clear && cross-env NODE_ENV=development webpack --mode=development && npm run clear:html && npm run clear:public",
+    "build:prod": "npm run clear && cross-env NODE_ENV=production webpack --mode=production && npm run clear:html && npm run clear:public",
+    "build": "npm run clear && webpack",
+    "start": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/requirejs": "^2.1.37",
+    "@types/three": "^0.170.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^7.0.3",
+    "html-webpack-plugin": "^5.6.3",
+    "terser-webpack-plugin": "^5.3.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "three": "^0.170.0"
+  }
+}
