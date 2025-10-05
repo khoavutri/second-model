@@ -3,6 +3,11 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { addWheel } from './util';
+import RAPIER from "@dimforge/rapier3d-compat";
+
+console.time("khoa");
+RAPIER.init()
+console.timeEnd("khoa");
 
 const container = document.getElementById('container') as HTMLDivElement;
 const loader = new THREE.TextureLoader();

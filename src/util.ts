@@ -1,24 +1,27 @@
 // src/util.ts
 import * as THREE from 'three';
 
-export const addWheel = (index: number, pos: [number, number, number], mesh: THREE.Mesh) => {
+export const addWheel = (
+    index: number,
+    pos: [number, number, number],
+    carMesh: THREE.Mesh
+) => {
     const wheelRadius = 0.3;
     const wheelWidth = 0.4;
+    const carHeight = 1;
 
-    const geometry = new THREE.CylinderGeometry(wheelRadius, wheelRadius, wheelWidth, 16);
-    geometry.rotateZ(Math.PI * 0.5);
-    const material = new THREE.MeshStandardMaterial({ color: 0x000000 });
-    const wheel = new THREE.Mesh(geometry, material);
+    const pivot = new THREE.Object3D();
+    pivot.position.set(pos[0], pos[1] - wheelRadius - carHeight / 2, pos[2]);
+    carMesh.add(pivot);
 
-    const carHeight = 1; // Chiều cao thân xe
-    wheel.position.set(
-        pos[0],
-        pos[1] - wheelRadius - carHeight / 2, // Đặt bánh xe dưới đáy xe
-        pos[2]
-    );
+    const geo = new THREE.CylinderGeometry(wheelRadius, wheelRadius, wheelWidth, 16);
+    geo.rotateZ(Math.PI * 0.5);
+    const mat = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    const wheelMesh = new THREE.Mesh(geo, mat);
+    wheelMesh.castShadow = true;
+    wheelMesh.receiveShadow = true;
 
-    wheel.castShadow = true;
-    mesh.add(wheel);
+    pivot.add(wheelMesh);
 
-    return wheel;
-}
+    return { pivot, mesh: wheelMesh };
+};

@@ -5,11 +5,16 @@
     "module": "es6",
     "target": "es5",
     "jsx": "react",
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
     "allowJs": true,
     "strict": true,
     "declaration": true
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
