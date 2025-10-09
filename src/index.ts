@@ -56,14 +56,14 @@ scene.add(light);
 const geometryPlane = new THREE.BoxGeometry(100, 0.5, 100);
 const materialPlane = new THREE.MeshStandardMaterial({ color: 0xFFFFFF });
 const plane = new THREE.Mesh(geometryPlane, materialPlane);
-plane.position.set(0, - 0.33, - 20);
+plane.position.set(0, - 0.25, - 20);
 plane.receiveShadow = true;
 scene.add(plane);
 
 loader.load('/public/grid.png', (texture) => {
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(20, 20);
+    texture.repeat.set(80, 80);
     plane.material.map = texture;
     plane.material.needsUpdate = true;
 });

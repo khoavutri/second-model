@@ -6,22 +6,17 @@ export const addWheel = (
     pos: [number, number, number],
     carMesh: THREE.Mesh
 ) => {
+    const wheelList = []
     const wheelRadius = 0.3;
     const wheelWidth = 0.4;
-    const carHeight = 1;
-
-    const pivot = new THREE.Object3D();
-    pivot.position.set(pos[0], pos[1] - wheelRadius - carHeight / 2, pos[2]);
-    carMesh.add(pivot);
-
-    const geo = new THREE.CylinderGeometry(wheelRadius, wheelRadius, wheelWidth, 16);
-    geo.rotateZ(Math.PI * 0.5);
-    const mat = new THREE.MeshStandardMaterial({ color: 0x000000 });
-    const wheelMesh = new THREE.Mesh(geo, mat);
-    wheelMesh.castShadow = true;
-    wheelMesh.receiveShadow = true;
-
-    pivot.add(wheelMesh);
-
-    return { pivot, mesh: wheelMesh };
+    const geometry = new THREE.CylinderGeometry(wheelRadius, wheelRadius, wheelWidth, 16);
+    geometry.rotateZ(Math.PI * 0.5);
+    const material = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    const wheel = new THREE.Mesh(geometry, material);
+    wheel.castShadow = true;
+    const inputPos = new THREE.Vector3(...pos)
+    wheel.position.copy(inputPos);
+    wheelList.push(wheel);
+    carMesh.add(wheel);
+    return { wheels: wheelList, car: carMesh }
 };
